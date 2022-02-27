@@ -1,6 +1,7 @@
 ## **Aspect Oriented Programming**
   * AOP 소개
     * 흩어진 코드를 한 곳으로 모아
+    * 로깅, transactional 처리, 성능측정, 인증, 권한 확인 기능 등에서 사용가능
     * 흩어진 AAAA와 BBBB
       ```java
       class A {
