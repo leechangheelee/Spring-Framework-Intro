@@ -29,3 +29,13 @@
       Aspect 코드 (나의 코드)
       @Cacheable | @CacheEvict | ...
       ```
+***
+  * (추상화 예시) 웹 MVC
+    * @Controller 와 @RequestMapping
+      ```
+      나의 코드
+      @Controller | @RequestMapping | ...
+      Servlet | Reactive
+      톰캣, 제티, 네티, 언더토우
+      ```
+    * 대부분의 코드는 추상화 되었기 때문에 밑단에 있는 기술을 바꾸더라도 나의 코드가 바뀌지 않음 → 이게 PSA의 가장 큰 목표이자 장점. 그렇기 때문에 테스트하기도 더 쉬움.
