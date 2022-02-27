@@ -147,6 +147,8 @@
       ```
     * @Autowired / @Inject를 어디에 붙일까?
       * 생성자
+        * 기본적으로 생성자를 쓸 수 있다면 생성자에 붙임
+        * 어떠한 클래스에 반드시 필요한 의존성이다 할 때
         ```java
         /* OwnerController.java */
         ...
@@ -157,6 +159,7 @@
         ...
         ```
       * 필드
+        * setter가 없는 경우 사용
         ```java
         /* OwnerController.java */
         ...
@@ -165,3 +168,4 @@
         ...
         ```
       * Setter
+        * 만약 이 클래스가 의존성에 대한 setter를 가지고 있다고 하면 setter에 붙임
