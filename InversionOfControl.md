@@ -108,3 +108,25 @@
       * 또는 ApplicationContext 에서 getBean() 으로 직접 꺼내거나
     * 특징
       * 오로지 "빈" 들만 의존성 주입을 해줌
+***
+  * 의존성 주입 (Dependency Injection) ← 필요한 의존성을 어떻게 받아올 것인가...
+    * 어떤 빈이 되는 클래스에 생성자가 오로지 하나만 있고 그 생성자의 매개변수 타입이 빈으로 등록되어 있다면 그 빈을 주입을 해줌 (@Autowired 없이)
+      ```java
+      /* OwnerController */
+      ...
+      @Controller
+      class OwnerController {
+
+          private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+
+          private final OwnerRepository owners;
+
+          public OwnerController(OwnerRepository clinicService) {
+              this.owners = clinicService;
+          }
+      ...
+      ```
+    * @Autowired / @Inject를 어디에 붙일까?
+      * 생성자
+      * 필드
+      * Setter
