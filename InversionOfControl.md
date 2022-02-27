@@ -57,7 +57,7 @@
     ```
 ***
   * 빈 (Bean)
-    * 스프링 IoC 컨테이너가 관리하는 객체
+    * 스프링 IoC 컨테이너가 관리하는 객체 (인텔리제이에서 콩 아이콘으로 표시됨)
     * 어떻게 등록하지?
       * Component Scanning
         * @Component
@@ -112,7 +112,7 @@
   * 의존성 주입 (Dependency Injection) ← 필요한 의존성을 어떻게 받아올 것인가...
     * 어떤 빈이 되는 클래스에 생성자가 오로지 하나만 있고 그 생성자의 매개변수 타입이 빈으로 등록되어 있다면 그 빈을 주입을 해줌 (@Autowired 없이)
       ```java
-      /* OwnerController */
+      /* OwnerController.java */
       ...
       @Controller
       class OwnerController {
@@ -126,7 +126,42 @@
           }
       ...
       ```
+      ```java
+      /* VisitController.java */
+      ...
+      @Controller
+      class VisitController {
+      
+          private final VisitRepository visits;
+          private final PetRepository pets;
+          /*
+          public interface PetRepository extends Repository<Pet, Integer>
+          ↑ 스프링 데이터 JPA 가 빈을 만들어서 Application Context 에 등록해줌
+          */
+          
+          public VisitController(VisitRepository visits, PetRepository pets) {
+              this.visits = visits;
+              this.pets = pets;
+          }
+      ...
+      ```
     * @Autowired / @Inject를 어디에 붙일까?
       * 생성자
+        ```java
+        /* OwnerController.java */
+        ...
+        @Autowired
+        public OwnerController(OwnerRepository clinicService) {
+            this.owners = clinicService;
+        }
+        ...
+        ```
       * 필드
+        ```java
+        /* OwnerController.java */
+        ...
+        @Autowired
+        private final OwnerRepository owners;
+        ...
+        ```
       * Setter
