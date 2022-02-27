@@ -31,3 +31,27 @@
       ```
 ***
   * IoC (Inversion of Control) 컨테이너
+    * ApplicationContext (BeanFactory)
+    * 빈(bean)을 만들고 엮어주며 제공해준다.
+    * 빈 설정
+      * 이름 또는 ID
+      * 타입
+      * 스코프
+    * 아이러니하게도 컨테이너를 직접 쓸 일은 많지 않다.
+    ```java
+    /* SampleController.java */
+    ...
+    @RestController
+    public class SampleController {
+
+        @Autowired
+        ApplicationContext applicationContext;
+        // Application Context 가 IoC 컨테이너임
+        // IoC 컨테이너 자체를 꺼내다가 쓸 수 있음. 꺼내는 방법이 @Autowired
+
+        @GetMapping("/context")
+        public String context() {
+            return "hello " + applicationContext.getBean(OwnerRepository.class);
+        }
+    }
+    ```
