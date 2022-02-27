@@ -69,6 +69,52 @@
         public @interface LogExecutionTime {
         }
         ```
+        * @LogExecutionTime 애노테이션으로 적용할 곳 표시
+          ```java
+          /* SampleController.java */
+          ...
+          @LogExecutionTime
+          @GetMapping("/context")
+          public String context() {
+              return "hello " + changhee;
+          }
+          ...
+          ```
+          ```java
+          /* OwnerController.class */
+          ...
+          @LogExecutionTime
+          @GetMapping("/owners/new")
+          public String initCreationForm(Map<String, Object> model) {
+              Owner owner = new Owner();
+              model.put("owner", owner);
+              return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+          }
+          ...
+          @LogExecutionTime
+          @PostMapping("/owners/new")
+          public String processCreationForm(@Valid Owner owner, BindingResult result) {
+              if (result.hasErrors()) {
+                  return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+              }
+              else {
+                  this.owners.save(owner);
+                  return "redirect:/owners/" + owner.getId();
+              }
+          }
+          ...
+          @LogExecutionTime
+          @GetMapping("/owners/find")
+          public String initFindForm(Map<String, Object> model) {
+              model.put("owner", new Owner());
+              return "owners/findOwners";
+          }
+          ...
+          @LogExecutionTime
+          @GetMapping("/owners")
+          public String processFindForm(@RequestParam(defaultValue = "1") int page, Owner owner, BindingResult result, Model model) {
+          ...
+          ```
       * 실제 Aspect (@LogExecutionTime 애노테이션 달린곳에 적용)
         ```java
         /* aspect/LogAspect.java */
