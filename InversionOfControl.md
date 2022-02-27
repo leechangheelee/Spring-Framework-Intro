@@ -55,3 +55,56 @@
         }
     }
     ```
+***
+  * 빈 (Bean)
+    * 스프링 IoC 컨테이너가 관리하는 객체
+    * 어떻게 등록하지?
+      * Component Scanning
+        * @Component
+          * @Repository
+          * @Service
+          * @Controller
+        * 또는 직접 일일이 XML 이나 자바 설정 파일에 등록
+          ```java
+          /* PetClinicApplication.java */
+          ...
+          @SpringBootApplication
+          public class PetClinicApplication {
+
+              /*
+               * 빈 직접 등록. 메소드의 이름이 이 빈의 이름이 됨
+               * 단, Bean이라는 애노테이션을 단 메소드를 정의할 때에는
+               * 항상 Configuration 이라는 애노테이션을 가지고 있는 클래스 안에서 정의해야 함
+               * @SpringBootApplication 애노테이션도 안에 Configuration 애노테이션 갖고있음
+               */
+              @Bean
+              public String changhee() {
+                  return "changhee";
+              }
+
+              public static void main(String[] args) {
+                  SpringApplication.run(PetClinicApplication.class, args);
+              }
+
+          }
+          ```
+    * 어떻게 꺼내쓰지?
+      * @Autowired 또는 @Inject
+        ```java
+        /* SampleController.java */
+        ...
+        @RestController
+        public class SampleController {
+
+            @Autowired
+            String changhee;
+
+            @GetMapping("/context")
+            public String context() {
+                return "hello " + changhee;
+            }
+        }
+        ```
+      * 또는 ApplicationContext 에서 getBean() 으로 직접 꺼내거나
+    * 특징
+      * 오로지 "빈" 들만 의존성 주입을 해줌
