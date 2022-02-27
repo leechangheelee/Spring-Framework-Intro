@@ -1,5 +1,6 @@
 ## **Portable Service Abstraction**
   * PSA 소개
+    * 스프링이 제공하는 대부분의 API가 PSA임.
     * 잘 만든 인터페이스 (추상화)
       ```
       나의 코드
